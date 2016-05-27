@@ -1,0 +1,42 @@
+startup_message off
+vbell off
+#The scroll buffer of GNU Screen can be accessed with C-a. However, this is very inconvenient. 
+termcapinfo xterm|xterms|xs|rxvt ti@:te@
+
+defscrollback 10000
+
+backtick 1 5 0 true
+termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;\007'
+hardstatus string "%H (%n: %t)"
+# Left edge:
+caption string "%{= kw}%{= kw}%-Lw%{= kW}%{+b}[%n %t]%{-b}%{= kw}%+Lw%1`"
+# Right edge:
+#caption string "%{= dd}%-= %{-= kw}%{= kw}%-Lw%{= kW}%{+b}[%n %t]%{-b}%{= kw}%+Lw%1`"
+caption always
+
+#screen -t bash     2 bash --rcfile ~/.bashrc1
+screen -t bash     1 bash --rcfile ~/.bashrc1
+
+# Banish screen 0
+bind "c" screen 1
+bind "^c" screen 1
+
+
+# Use Fx keys for screen switching
+bindkey "OP" select 1    #F1
+bindkey "OQ" select 2    #F2
+bindkey "OR" select 3    #F3
+bindkey "OS" select 4
+bindkey "[15~" select 5
+bindkey "[17~" select 6
+bindkey "[18~" select 7
+bindkey "[19~" select 8
+bindkey "[20~" select 9
+bindkey "[21~" screen -t bash     1 bash --rcfile ~/.bashrc1 #F10
+bindkey "[23~" prev	  #F11
+bindkey "[24~" next	  #F12
+
+
+termcapinfo xterm* ti@:te@
+
+#EOF
